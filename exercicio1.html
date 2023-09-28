@@ -29,19 +29,23 @@ gerarXadrez(5) ->
  [255, 	  0, 	255, 	  0, 	255]]
 </pre>
 <script type="text/javascript">
-function gerarXadrez(valor){
+function gerarXadrez(tamanho){
+	//criar variáveis;
 	valor1 = 0;
 	valor2 = 255;
     matriz = [];
-    for (i = 0; i < valor; i++){
-        matriz[i] = []
-        for (y = 0; y < valor; y++){
-            if ((i + y) % 2 == 0) {
-                matriz[i].push(valor1);
+	//primeiro loop para declarar array dentro do array (linhas) e fazer processo de inserção de dados
+    for (linha = 0; linha < tamanho; linha++){
+        matriz[linha] = []
+        for (coluna = 0; coluna < tamanho; coluna++){
+			//se a variavel de primeiro loop for 0 e do secundo for 0, então vai começar com 0
+			//quando o valor do primeiro loop for 1 e for somado com o "0" do segundo loop a divisão restante ficará 1 então ativa o else
+            if ((linha + coluna) % 2 == 0) {
+                matriz[linha].push(valor1);
             }	
 			else{
 
-				matriz[i].push(valor2);	
+				matriz[linha].push(valor2);	
 			}
         }
     }

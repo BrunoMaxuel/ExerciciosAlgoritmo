@@ -30,14 +30,24 @@ gerarX(5) ->
 	
 	<script type="text/javascript">
 function gerarX(tamanho) {
+	//declarar array
     matriz = [];
-    for (let i = 0; i < tamanho; i++) {
-        matriz[i] = [];
-        for (let j = 0; j < tamanho; j++) {
-            if (i === j || i === tamanho - j - 1) {
-                matriz[i][j] = 0;
+    for (let linha = 0; linha < tamanho; linha++) {
+		//insere um array dentro de outro transformando em uma matriz
+        matriz[linha] = [];
+        for (let coluna = 0; coluna < tamanho; coluna++) {
+			//se a linha for do mesmo tamanho da coluna vou adicionar zero no inicio
+			//ou se a linha for do tamanho da variavel padrão "tamanhoPadrao" que é 5 - a quantidade de coluna - 1
+			//supomos o seguinte, tamanho 5 coluna 4: 5 - 4 - 1 = 0 numero de linha é igual 0 
+			//primeira condição adiciona um valor no inicio e a segunda no final
+			//continuação:  linha 1 coluna zero não entra linha 1 =  5 - 0 - 1? não então entra valor 255
+			//linha 1 coluna 1 entra na condição vai zero na segunda posição
+			//linha 1 coluna 3 não entra linha 1 = 5 - 1 - 1? não
+			//assim por diante
+             if (linha === coluna || linha === tamanho - coluna - 1) {
+                matriz[linha][coluna] = 0;
             } else {
-                matriz[i][j] = 255;
+                matriz[linha][coluna] = 255;
             }
         }
     }
@@ -55,7 +65,8 @@ var Module = {
 		document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
 		
 		//A sua função será chamada aqui
-		img = gerarX(5);
+		tamanhoPadrao = 5
+		img = gerarX(tamanhoPadrao);
 		//E a matriz será exibida aqui
 		imshow(img);
   }

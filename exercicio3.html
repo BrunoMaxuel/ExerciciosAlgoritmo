@@ -14,8 +14,7 @@
 	  <canvas id="canvasOutput" ></canvas>
 	</div>
 	<script type="text/javascript">
-function cortarMatriz(){
-	
+function cortarMatriz(matriz, x, y, size){
   const novaMatriz = [];
   for (let i = y; i < y + size; i++) {
     const linha = [];
@@ -27,18 +26,19 @@ function cortarMatriz(){
     novaMatriz.push(linha);
   }
   return novaMatriz;
-
 }
-matriz = 
-[
-  [ 10,	 20,  	 30,   	 40, 	 50]
- [ 60, 	 70, 	 80, 	 90, 	100],
- [110, 	120, 	130, 	140, 	150],
- [210, 	220, 	230, 	240, 	250]
-] 
-x = 1;
-y = 1;
-size = 3
+
+// Defina a matriz e os parâmetros x, y e size antes de chamar a função
+const matriz = [
+  [ 10, 20, 30, 40, 50],
+  [ 60, 70, 80, 90, 100],
+  [110, 120, 130, 140, 150],
+  [160, 170, 180, 190, 200],
+  [210, 220, 230, 240, 250]
+];
+const x = 1;
+const y = 1;
+const size = 3;
 console.log(cortarMatriz(matriz, x, y, size));
 	
 	</script>
