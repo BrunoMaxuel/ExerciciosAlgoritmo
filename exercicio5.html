@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>OpenCV.js - Exercício 5</title>
+  <script async src="opencv.js" type="text/javascript"></script>
+  <script async src="impl.js"   type="text/javascript"></script>
+</head>
+<body>
+	<h2>OpenCV.js - Exercício 5</h2>
+	<p id="status">OpenCV.js is loading...</p>
+  
+	<div>
+
+    <div class="inputoutput">
+	
+	
+		<img id="imageSrc" alt="Escolha uma imagem" />
+		<input type="file" id="fileInput" name="file" />
+	 
+		<canvas id="canvasOutput" style="width:512px;"></canvas>
+    </div>
+  </div>
+  <script type="text/javascript">
+
+	var Module = {
+		// https://emscripten.org/docs/api_reference/module.html#Module.onRuntimeInitialized
+		onRuntimeInitialized() {
+			document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
+	  }
+	};
+	
+	
+	/**
+	 FAÇA O SEU CÓDIGO AQUI
+	*/
+	function conv(matriz, kernel){
+			
+	}
+
+	
+    /**
+	 Não mexa neste código
+	*/
+	let imgElement = document.getElementById('imageSrc');
+	let inputElement = document.getElementById('fileInput');
+	inputElement.addEventListener('change', (e) => {
+		imgElement.src = URL.createObjectURL(e.target.files[0]);
+	}, false);
+	
+	imgElement.onload = function() {
+		let img = cv.imread(imgElement);
+		
+		//converter mat para array
+		let grayResp = matChannelToMatrix(img, 0);
+		
+		console.log(grayResp);
+		
+		kernel = [[ 0.0625, 0.125, 0.0625],
+				  [ 0.125,  0.25,  0.125],
+				  [ 0.0625, 0.125, 0.0625]];
+		
+		
+		grayConv = conv(grayResp, kernel);
+		
+		imshow(grayConv);
+	};
+	//Não mexer até aqui
+</script>
+	
+<pre>
+Crie uma função que receba uma matriz:
+
+[[1,  2,  3,  4],   
+ [5,  6,  7,  8],
+ [9, 10, 11, 12],
+ [13,14, 15, 16]]
+ 
+Para cada elemento da matriz essa função deverá usar a função que faz um recorte da matriz
+Ex, para a linha 0 coluna 0 temos o valor 1 na posição central, então ele deve trazer:
+
+[[1, 1, 2],
+ [1, 1, 2],   
+ [5, 5, 6]]
+ 
+Em seguida, para cada um desses cortes, você irá utilizar a função que multiplica pelo kernel
+
+[[1, 1, 2],          [[0,1,0],     1*0 + 1*1 + 2*0 +
+ [1, 1, 2],   ->     [1,2,1],   -> 1*1 + 1*2 + 2*1 +
+ [5, 5, 6]]          [0,1,0]]      5*0 + 5*1 + 6*0 = 0 + 1 + 0 + 1 + 2 + 2 + 0 + 5 + 0 = 11
+
+O resultado da função deve ser adicionado em uma nova matriz do mesmo tamanho da matriz recebida,
+em seguida ele deve fazer a mesma coisa para todas as outras posições da matriz
+ 
+[[11,  -,  -,  -],   
+ [-,  -,  -,  -],
+ [-,  -,  -,  -],
+ [-,  -,  -,  -]]
+</pre>
+
+</body>
+</html>
